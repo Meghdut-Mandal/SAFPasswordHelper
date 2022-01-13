@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'MainApp'
+        )
+    }
+}
+
+dependencies {
+
+}
+
+test {
+    useJUnitPlatform()
+}
