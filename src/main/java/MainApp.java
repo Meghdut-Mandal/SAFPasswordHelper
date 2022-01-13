@@ -31,6 +31,7 @@ public class MainApp
 {
 
     private static final String CREDENTIALS_FILE_NAME = "pass.txt";
+    public static final String App_Name = "SAF Password Helper";
     private PopupMenu trayPopupMenu;
 
     // base64 decode a string
@@ -103,10 +104,18 @@ public class MainApp
             // create the credentials
             Credentials credentials = new Credentials(username, password);
             addCredentialMenuItem(credentials);
-            String encodedCredentials = "\n" + encode(username) + ":" + encode(password);
+            String encodedCredentials = encode(username) + ":" + encode(password);
             File credentialFile = new File(CREDENTIALS_FILE_NAME);
             try{
-                Files.write(credentialFile.toPath(), encodedCredentials.getBytes(), StandardOpenOption.APPEND);
+                StandardOpenOption openOption;
+                if (!credentialFile.exists()) {
+                    openOption = StandardOpenOption.CREATE;
+                } else {
+                    openOption = StandardOpenOption.APPEND;
+                    encodedCredentials = "\n" + encodedCredentials;
+                }
+
+                Files.write(credentialFile.toPath(), encodedCredentials.getBytes(), openOption);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -166,7 +175,7 @@ public class MainApp
         //get the systemTray of the system
         SystemTray systemTray = SystemTray.getSystemTray();
 
-         // get class loader
+        // get class loader
         Image image = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("password.png")));
 
         //popupmenu
@@ -185,7 +194,7 @@ public class MainApp
 
         addCredentials();
         //setting tray icon
-        TrayIcon trayIcon = new TrayIcon(image, "Newton Password Manager", trayPopupMenu);
+        TrayIcon trayIcon = new TrayIcon(image, App_Name, trayPopupMenu);
         //adjust to default size as per system recommendation
         trayIcon.setImageAutoSize(true);
 
