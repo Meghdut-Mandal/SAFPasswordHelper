@@ -11,3 +11,7 @@ or Simple as FU*k Password Helper
 1. Double click to run the jar.
 1. You will find a icon, and click on it.
 1. Thier are 2 options... Add Credentials and Exit.
+
+
+
+<img width="280" alt="Screenshot 2022-01-13 at 11 15 05 AM" src="https://user-images.githubusercontent.com/39855414/149272786-5759f70e-4557-4d27-b416-1aea44890ed6.png">
